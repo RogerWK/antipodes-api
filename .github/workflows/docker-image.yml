@@ -1,0 +1,22 @@
+##Specific the image name here 
+name: Publish and deploy docker image - Antipodes 
+
+## Specific the time to run the action 
+on:
+
+jobs:
+  publish_images:
+    runs-on:ubuntu-latest
+    steps:
+    - name: checkout
+      uses: actions/checkout@v4
+    - name: build image
+      run: docker build ./api/ -t USER_NAME/DIRECTORY:latest
+    #Docker build command to build the image
+    - name: push image to docker hub
+      run: |
+       docker login -u USER_NAME -p ${{secrets.DOCKER_ACCESS_TOKEN_HERE}}
+       docker push USER_NAME/devops-qr-code-backend:latest
+      
+    
+   
