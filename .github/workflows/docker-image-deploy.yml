@@ -1,0 +1,30 @@
+# Specify the name here 
+name: Deploy Docker image - Antipodes 
+on:
+  # [workflow dispatch] - uncomment allows manual trigger
+  # Only push the Docker image when there are changes on the files
+  push:
+    branches:
+      -main
+    # Specify the directory of the Docker files that have changes   
+    paths:
+      - 'api/Dockerfile'
+      - 'FILE_DIRECTORY/Dockerfile'
+jobs:
+  publish_images:
+    runs-on: ubuntu-latest
+    steps:
+    - name: Checkout
+      uses: actions/checkout@v4
+      
+    - name: Build image
+      run: docker build ./api/ -t USER_NAME/FILE_DIRECTORY:latest
+      
+      #Docker build command to build the image
+    - name: Push image to Docker
+      run: |
+       docker login -u USER_NAME -p ${{secrets.DOCKER_ACCESS_TOKEN_HERE}}
+       docker push USER_NAME/FILE_DIRECTORY:latest
+      
+    
+   
