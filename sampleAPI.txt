@@ -1,0 +1,5 @@
+#Returns fund geom mean, benchmark geom mean, and alpha.
+GET /returns?start_date=2025-01-01&end_date=2025-06-30
+
+#Exposure API
+GET /exposure-diff?start_date=2025-04-01&end_date=2025-06-30&group_by=Antipodes%20Region
