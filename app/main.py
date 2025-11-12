@@ -10,12 +10,17 @@ app = FastAPI(title="Antipodes API", version="1.0.0")
 
 # Load Excel once
 xl = pd.ExcelFile(settings.excel_path)
+#read the sheet and convert it into pd frame
 returns_df = xl.parse(settings.sheet_returns)
+# convert to datetime format
 returns_df[settings.date_col_returns] = pd.to_datetime(returns_df[settings.date_col_returns])
 
+#read the sheet and convert it into pd frame
 constituents_df = xl.parse(settings.sheet_constituents)
+# convert to datetime format
 constituents_df[settings.date_col_constituents] = pd.to_datetime(constituents_df[settings.date_col_constituents])
 
+#API status check
 @app.get("/health")
 def health():
     return {"status": "ok"}
@@ -52,7 +57,7 @@ def get_returns(
 def get_exposure_diff(
     start_date: str = Query(...),
     end_date: str = Query(...),
-    group_by: str = Query("Antipodes Region"),
+    group_by: str = Query("AntipodesRegion"),
     index: str | None = Query(None),
 ):
     if group_by not in constituents_df.columns:
