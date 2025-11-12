@@ -2,11 +2,11 @@ from pydantic import BaseSettings
 
 class Settings(BaseSettings):
     excel_path: str = "app/data/Returns_and_Constituent_Data.xlsx"
-    sheet_returns: str = "FundReturnsData"
+    sheet_returns: str = "Returns"
     sheet_constituents: str = "IndexConstituents"
 
     # Column names (adjust to match your Excel headers)
-    date_col_returns: str = "Date"
+    date_col_returns: str = "ReturnDate"
     fund_col: str = "FundReturn"
     benchmark_col: str = "BenchmarkReturn"
 
